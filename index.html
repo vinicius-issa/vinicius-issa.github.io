@@ -3,25 +3,49 @@
 
 <head>
     <script>
+        function del_cookie(name) {
+            // Cria uma data no passado 01/01/2010
+            var date = new Date();
+            // Converte a date para GMT
+            date = date.toGMTString();
+            // Tenta modificar o valor do cookie para a date expirada
+            // Assim ele será apagado
+            document.cookie = name + '=; expires=' + date + '; path=/';
+        }
+
+        function remove_all_cookies(){
+            const cookies = document.cookie.split(';');
+            const cookie_names = cookies.map(cookie=>{
+                const name = cookie.split('=')[0]
+                return name;
+            })
+            cookie_names.forEach(cookie=>del_cookie(cookie))
+        }
+        
+        remove_all_cookies()
+        const cookie_names = []
+        const cookies = document.cookie.split(';')
+        console.log(cookies)
+        console.log(`Quantidade de cookies: ${cookies.length}`)
+
+        let lastNode = undefined;
+        let cookies_qty = cookies.length;
+        
         const observer = new MutationObserver(mutations => {
-            mutations.forEach(({ addedNodes }) => {
-                addedNodes.forEach((node, index) => {
-                    console.log("NODE #" + index)
-                    // For each added script tag
-                    if (node.nodeType === 1){
+            mutations.forEach( async ({ addedNodes }) => {
+                await setTimeout(()=>{
+                    addedNodes.forEach((node) => {
                         console.log(node)
-                    }
+                        const newCookies = document.cookie.split(';')
+                        const qty = newCookies.length;
+                        if (qty > cookies_qty) {
+                            console.log('====================Aumentou=================')
+                            cookies_qty = qty
+                        }
+    
+                    })
 
-                    // Firefox has this additional event which prevents scripts from beeing executed
-                    const beforeScriptExecuteListener = function (event) {
-                        // Prevent only marked scripts from executing
-                        if (node.getAttribute('type') === 'javascript/blocked')
-                            event.preventDefault()
-                        node.removeEventListener('beforescriptexecute', beforeScriptExecuteListener)
-                    }
-                    node.addEventListener('beforescriptexecute', beforeScriptExecuteListener)
-
-                })
+                },1000)
             })
         })
 
@@ -32,15 +56,17 @@
         })
 
     </script>
+
+
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-KSX6KTN');</script>
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-KSX6KTN');</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
