@@ -2,6 +2,36 @@
 <html lang="en">
 
 <head>
+    <script>
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(({ addedNodes }) => {
+                addedNodes.forEach((node, index) => {
+                    console.log("NODE #" + index)
+                    // For each added script tag
+                    if (node.nodeType === 1{
+                        console.log(node)
+                    }
+
+                    // Firefox has this additional event which prevents scripts from beeing executed
+                    const beforeScriptExecuteListener = function (event) {
+                        // Prevent only marked scripts from executing
+                        if (node.getAttribute('type') === 'javascript/blocked')
+                            event.preventDefault()
+                        node.removeEventListener('beforescriptexecute', beforeScriptExecuteListener)
+                    }
+                    node.addEventListener('beforescriptexecute', beforeScriptExecuteListener)
+
+                })
+            })
+        })
+
+        // Starts the monitoring
+        observer.observe(document.documentElement, {
+            childList: true,
+            subtree: true
+        })
+
+    </script>
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
