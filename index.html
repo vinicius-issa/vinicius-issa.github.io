@@ -2,62 +2,6 @@
 <html lang="en">
 
 <head>
-    <script>
-        function del_cookie(name) {
-            // Cria uma data no passado 01/01/2010
-            var date = new Date();
-            // Converte a date para GMT
-            date = date.toGMTString();
-            // Tenta modificar o valor do cookie para a date expirada
-            // Assim ele será apagado
-            document.cookie = name + '=; expires=' + date + '; path=/';
-        }
-
-        function remove_all_cookies(){
-            const cookies = document.cookie.split(';');
-            const cookie_names = cookies.map(cookie=>{
-                const name = cookie.split('=')[0]
-                return name;
-            })
-            cookie_names.forEach(cookie=>del_cookie(cookie))
-        }
-        
-        remove_all_cookies()
-        const cookie_names = []
-        const cookies = document.cookie.split(';')
-        console.log(cookies)
-        console.log(`Quantidade de cookies: ${cookies.length}`)
-
-        let lastNode = undefined;
-        let cookies_qty = cookies.length;
-        
-        const observer = new MutationObserver(mutations => {
-            mutations.forEach( async ({ addedNodes }) => {
-                await setTimeout(()=>{
-                    addedNodes.forEach((node) => {
-                        console.log(node)
-                        const newCookies = document.cookie.split(';')
-                        const qty = newCookies.length;
-                        if (qty > cookies_qty) {
-                            console.log('====================Aumentou=================')
-                            cookies_qty = qty
-                        }
-    
-                    })
-
-                },1000)
-            })
-        })
-
-        // Starts the monitoring
-        observer.observe(document.documentElement, {
-            childList: true,
-            subtree: true
-        })
-
-    </script>
-
-
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
                 w[l] = w[l] || []; w[l].push({
@@ -71,25 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Facebook Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '686934931948744');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=686934931948744&ev=PageView&noscript=1" /></noscript>
-    <!-- End Facebook Pixel Code -->
+    <script src="https://apidev.privacy.rockcontent.com/api/v1/cookies/js/essaehminhahashouua"></script>
 </head>
 
 <body>
