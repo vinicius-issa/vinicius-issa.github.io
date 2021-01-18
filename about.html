@@ -13,14 +13,45 @@
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
     <link rel="canonical" href="https://vinicius-issa.github.io/normal.html">
-    <script async defer data-website-id="e7fc3adf-350e-4dee-880b-7724328d0359" src="https://umami.rockcontent.com/umami.js"></script>
     <title>My AMP Page</title>
     <!-- <script async defer data-website-id="e7fc3adf-350e-4dee-880b-7724328d0359" src="https://umami.rockcontent.com/umami.js"></script> -->
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    
   </head>
   <body>
     <!-- <script>
         alert("Hello World")
     </script> -->
+    <amp-analytics>
+      <script type="application/json">
+        {
+          "requests": {
+            "pageview": "https://umami.rockcontent.com/api/collect"
+          },
+          "triggers": {
+            "pageview": {
+              "on": "visible",
+              "request": "pageview"
+            }
+          },
+          "transport": {
+            "useBody": true
+          },
+          "extraUrlParams": {
+            "type": "pageview", 
+            "payload": { 
+                "website": "e7fc3adf-350e-4dee-880b-7724328d0359", 
+                "hostname": "${ampdocHostname}", 
+                "screen": "${viewportWidth}x${viewportHeight}", 
+                "language": "${browserLanguage}", 
+                "cache": null, 
+                "url": "${canonicalUrl}", 
+                "referrer": "${documentReferrer}" 
+            }
+          }
+        } 
+      </script>
+    </amp-analytics>
     <h1>AMP</h1>
 
   </body>
